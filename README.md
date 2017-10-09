@@ -14,14 +14,14 @@ windows, so I wrote simple tool which combines the configs and calls
 
 ## Sample config
 
-`~/.tmuxp-combine/myproject/base.yml`:
+`~/.tmuxp-combine/mysession/base.yml`:
 
 ```yaml
-session_name: myproject
+session_name: mysession
 start_directory: ~/projects/myproject
 ```
 
-`~/.tmuxp-combine/myproject/windows/docker.yml`:
+`~/.tmuxp-combine/mysession/windows/docker.yml`:
 
 ```yaml
 window_name: docker
@@ -34,7 +34,7 @@ panes:
   - docker-compose up
 ```
 
-`~/.tmuxp-combine/myproject/windows/nodejs.yml`:
+`~/.tmuxp-combine/mysession/windows/nodejs.yml`:
 
 ```yaml
 window_name: nodejs
@@ -47,21 +47,21 @@ panes:
   - npm run serve
 ```
 
-Running the `myproject` in `tmux` only with `nodejs` window:
+Running the `mysession` in `tmux` only with `nodejs` window:
 
 ```bash
-tmuxp-combine load myproject -w nodejs
+tmuxp-combine load mysession -w nodejs
 ```
 
-Running the `myproject` in `tmux` only with `nodejs` and `docker` windows:
+Running the `mysession` in `tmux` only with `nodejs` and `docker` windows:
 
 ```bash
-tmuxp-combine load myproject -w nodejs -w docker
+tmuxp-combine load mysession -w nodejs -w docker
 ```
 
 
-Running the `myproject` in `tmux` with all windows:
+Running the `mysession` in `tmux` with all windows:
 
 ```bash
-tmuxp-combine load myproject
+tmuxp-combine load mysession
 ```

@@ -7,7 +7,7 @@ import yaml
 from tmuxp_combine.exceptions import (
     ConfigDirectoryNotFound,
     ConfigNotFound,
-    ProjectNotFound
+    SessionNotFound
 )
 
 
@@ -28,28 +28,28 @@ def get_config_path(config_path=None):
     return config_path
 
 
-def get_project_path(project_name, config_path=None):
+def get_session_path(session_name, config_path=None):
     config_path = get_config_path(config_path=config_path)
-    return os.path.join(config_path, project_name)
+    return os.path.join(config_path, session_name)
 
 
-def _get_windows_path(project_path):
-    return os.path.join(project_path, 'windows')
+def _get_windows_path(session_path):
+    return os.path.join(session_path, 'windows')
 
 
-def get_window_names(project_name, config_path=None):
-    project_path = get_project_path(project_name, config_path=config_path)
-    windows_path = _get_windows_path(project_path)
+def get_window_names(session_name, config_path=None):
+    session_path = get_session_path(session_name, config_path=config_path)
+    windows_path = _get_windows_path(session_path)
     try:
         names = os.listdir(windows_path)
     except EnvironmentError:
-        raise ProjectNotFound(project_name)
+        raise SessionNotFound(session_name)
 
     splits = [os.path.splitext(name) for name in names]
     return [name for name, ext in splits if ext == '.yml']
 
 
-def get_project_names(config_path=None):
+def get_session_names(config_path=None):
     config_path = get_config_path(config_path=config_path)
     names = [
         name for name in os.listdir(config_path)
@@ -57,15 +57,15 @@ def get_project_names(config_path=None):
     return names
 
 
-def combine_configs(project_name, window_names):
-    project_path = get_project_path(project_name)
-    windows_path = _get_windows_path(project_path)
-    project_base_cfg_path = os.path.join(project_path, 'base.yml')
-    cfg = load_yaml_from_filepath(project_base_cfg_path)
+def combine_configs(session_name, window_names):
+    session_path = get_session_path(session_name)
+    windows_path = _get_windows_path(session_path)
+    session_base_cfg_path = os.path.join(session_path, 'base.yml')
+    cfg = load_yaml_from_filepath(session_base_cfg_path)
     windows_cfg = []
 
     if not window_names:
-        window_names = get_window_names(project_name)
+        window_names = get_window_names(session_name)
 
     for window_name in window_names:
         window_cfg_path = os.path.join(windows_path, window_name + '.yml')

@@ -4,10 +4,10 @@ from tmuxp_combine.core import combine_configs, get_config_yaml
 
 
 def prepare_parser(parser):
-    parser.add_argument('project')
+    parser.add_argument('session')
     parser.add_argument('-w', '--window', dest='windows', action='append')
 
 
-def command(project, windows):
-    cfg = combine_configs(project, windows)
+def command(session, windows):
+    cfg = combine_configs(session, windows)
     print(get_config_yaml(cfg), end='')

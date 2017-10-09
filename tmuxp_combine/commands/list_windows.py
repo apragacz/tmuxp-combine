@@ -4,10 +4,10 @@ from tmuxp_combine.core import get_window_names
 
 
 def prepare_parser(parser):
-    parser.add_argument('project')
+    parser.add_argument('session')
 
 
-def command(project):
-    window_names = get_window_names(project)
+def command(session):
+    window_names = get_window_names(session)
     for name in window_names:
         print(name)

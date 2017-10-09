@@ -14,13 +14,13 @@ class ConfigDirectoryNotFound(TMuxPCombineError):
         self.dir_path = dir_path
 
 
-class ProjectNotFound(TMuxPCombineError):
+class SessionNotFound(TMuxPCombineError):
 
-    def __init__(self, project_name):
-        super(ProjectNotFound, self).__init__(
-            'Project not found: {project_name}'.format(
-                project_name=project_name))
-        self.project_name = project_name
+    def __init__(self, session_name):
+        super(SessionNotFound, self).__init__(
+            'Session not found: {session_name}'.format(
+                session_name=session_name))
+        self.session_name = session_name
 
 
 class ConfigNotFound(TMuxPCombineError):
