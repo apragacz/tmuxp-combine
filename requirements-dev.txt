@@ -1,0 +1,5 @@
+ipython
+flake8
+pylint
+isort
+pypandoc
